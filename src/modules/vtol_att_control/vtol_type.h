@@ -363,9 +363,10 @@ protected:
 	virtual void onFrontTransitionCompleted() {}
 
 	/**
-	 * Called when a front transition is aborted into hover because fixed-wing is no longer requested.
+	 * Called when a front transition is aborted because fixed-wing is no longer requested.
+	 * Returns the mode to enter: hover, or a back transition for a type that needs to decelerate.
 	 */
-	virtual void onFrontTransitionAborted() {}
+	virtual mode onFrontTransitionAborted() { return mode::ROTARY_WING; }
 
 	/**
 	 * Called on every update while a quad-chute keeps the vehicle in hover, before the mode is set to hover.

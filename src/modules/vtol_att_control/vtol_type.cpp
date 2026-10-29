@@ -215,9 +215,8 @@ void VtolType::update_vtol_state()
 			break;
 
 		case mode::TRANSITION_TO_FW:
-			// abort into hover
-			onFrontTransitionAborted();
-			_common_vtol_mode = mode::ROTARY_WING;
+			// let the vehicle type choose hover or a back transition
+			_common_vtol_mode = onFrontTransitionAborted();
 			break;
 
 		case mode::TRANSITION_TO_MC:
