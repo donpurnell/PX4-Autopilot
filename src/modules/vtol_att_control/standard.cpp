@@ -166,11 +166,11 @@ void Standard::update_transition_state()
 
 			mc_weight = 1.0f - fabsf(_attc->get_calibrated_airspeed() - getBlendAirspeed()) /
 				    _airspeed_trans_blend_margin;
-			// time based blending when no airspeed sensor is set
 
 		} else if (!PX4_ISFINITE(_attc->get_calibrated_airspeed())) {
-			mc_weight = 1.0f - _time_since_trans_start / getMinimumFrontTransitionTime();
-			mc_weight = math::constrain(2.0f * mc_weight, 0.0f, 1.0f);
+			// no airspeed: blend over time, from the minimum to the open-loop transition time
+			mc_weight = math::interpolate(_time_since_trans_start, getMinimumFrontTransitionTime(),
+						      getOpenLoopFrontTransitionTime(), 1.0f, 0.0f);
 		}
 
 		// ramp up FW_PSP_OFF

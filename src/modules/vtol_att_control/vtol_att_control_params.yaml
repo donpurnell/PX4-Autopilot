@@ -104,7 +104,10 @@ parameters:
     VT_TRANS_MIN_TM:
       description:
         short: Front transition minimum time
-        long: Minimum time in seconds for front transition.
+        long: |-
+          Minimum time in seconds for front transition.
+          Without airspeed feedback, multicopter control is blended out between
+          this time and VT_F_TR_OL_TM.
       type: float
       default: 2.0
       unit: s
@@ -202,6 +205,7 @@ parameters:
         short: Airspeed-less front transition time (open loop)
         long: |-
           The duration of the front transition when there is no airspeed feedback available.
+          Multicopter control is blended out between VT_TRANS_MIN_TM and this time.
           When airspeed is used, transition timeout is declared if airspeed does not
           reach VT_ARSP_BLEND after this time.
       type: float

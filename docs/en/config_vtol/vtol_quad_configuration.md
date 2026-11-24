@@ -89,6 +89,7 @@ Parameter: [VT_F_TR_OL_TM](../advanced_config/parameter_reference.md#VT_F_TR_OL_
 
 This specifies the duration of the front transition in seconds when no airspeed feedback is available (e.g. no airspeed sensor present).
 It should be set to a value which ensures that the vehicle reaches a high enough airspeed to complete the transition, e.g. airspeed should exceed [VT_ARSP_TRANS](../advanced_config/parameter_reference.md#VT_ARSP_TRANS).
+Without airspeed feedback, multirotor control is blended out linearly between the minimum transition time [VT_TRANS_MIN_TM](../advanced_config/parameter_reference.md#VT_TRANS_MIN_TM) and this time.
 
 #### Transition Timeout
 
