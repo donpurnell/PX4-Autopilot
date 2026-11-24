@@ -103,9 +103,10 @@ public:
 	/**
 	 * @brief Calculate the estimated time needed to return.
 	 *
+	 * @param use_avoidance_path false estimates the straight line, which is never slower than the avoidance path
 	 * @return estimated return time.
 	 */
-	rtl_time_estimate_s calc_rtl_time_estimate();
+	rtl_time_estimate_s calc_rtl_time_estimate(bool use_avoidance_path = true);
 
 	void setReturnAltMin(bool min) { _enforce_rtl_alt = min; }
 	void setRtlAlt(float alt) {_rtl_alt = alt;};

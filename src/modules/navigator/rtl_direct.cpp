@@ -537,7 +537,7 @@ RtlDirect::RTLState RtlDirect::getActivationState()
 	return activation_state;
 }
 
-rtl_time_estimate_s RtlDirect::calc_rtl_time_estimate()
+rtl_time_estimate_s RtlDirect::calc_rtl_time_estimate(bool use_avoidance_path)
 {
 	_global_pos_sub.update();
 	_rtl_time_estimator.update();
@@ -578,11 +578,15 @@ rtl_time_estimate_s RtlDirect::calc_rtl_time_estimate()
 		// FALLTHROUGH
 		case RTLState::AVOID_GEOFENCE: {
 #if CONFIG_NAVIGATOR_GEOFENCE_AVOIDANCE
-				pos_before_loiter = add_geofence_avoidance_path_distance(
-							    _rtl_time_estimator,
-							    _navigator->get_geofence_avoidance_planner(),
-							    matrix::Vector2d(_global_pos_sub.get().lat, _global_pos_sub.get().lon)
-						    );
+
+				if (use_avoidance_path) {
+					pos_before_loiter = add_geofence_avoidance_path_distance(
+								    _rtl_time_estimator,
+								    _navigator->get_geofence_avoidance_planner(),
+								    matrix::Vector2d(_global_pos_sub.get().lat, _global_pos_sub.get().lon)
+							    );
+				}
+
 #endif // CONFIG_NAVIGATOR_GEOFENCE_AVOIDANCE
 			}
 
